@@ -10,16 +10,15 @@ ENV PATH="/app/venv/bin:$PATH"
 WORKDIR /app
 
 RUN pip install --no-cache-dir \
-    requests \
-    gpiozero \
+    board \
+    adafruit-circuitpython-bmp280 \
     prometheus_client \
-    requests \
-    smbus2 \
-    RPi.bme280 \
-    RPi.GPIO
+    paho-mqtt \
+    RPi.GPIO \
+    gpiozero
 
-COPY main.py .
+COPY sensor.py .
 
 EXPOSE 8000
 
-CMD ["python3", "-u", "main.py"]
+CMD ["python3", "-u", "sensor.py"]

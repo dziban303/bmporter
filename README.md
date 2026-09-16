@@ -1,8 +1,5 @@
 # rpi-bme280-to-prom
-Python script in docker container to get data from bme280 sensor to a prometheus endpoint.
 
-Will use port 8000 but can map it to whatever you want. Will collect data every 60 seconds, but can be changed with ENV variables RUN_INTERVAL_SECONDS. 
+This Python script within a docker container will get data from a Bosch BM**P**280 — that is, the temperature and pressure model, *not* the humidity model (BM**E**280), as well as the CPU temperature from the Pi. It then computes some other metrics (altimeter, density altitude, pressure tendency), and serves these data as a Prometheus endpoint (port 8000) as well as sending the data via MQTT.
 
-It will collect pressure, humidity and temperature from the sensor aswell as CPU temperature from the PI. 
-
-Just clone the repo, adjust if docker-copose.yml if needed and run 'docker-compose up -d' and off you go. The metrics will be available at http://<ip/dns>:<port>/metrics. 
+Just clone the repo, adjust if docker-compose.yml if needed and run 'docker-compose up -d' and off you go. The metrics will be available at http://<ip/dns>:<port>/metrics. 

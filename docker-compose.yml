@@ -1,4 +1,3 @@
-
 services:
   rpi-bme280-to-prom:
     build:
@@ -7,7 +6,13 @@ services:
     container_name: rpi-bme280-to-prom
     environment:
       - GPIOZERO_PIN_FACTORY=rpigpio
+      - TZ=America/Chicago
+      - MQTT_BROKER=192.168.0.175
+      - MQTT_PORT=1883
+      - MQTT_USER=
+      - MQTT_PW=
+      - MQTT_TOPIC="dzicave/pimedia/sensors"
     ports:
-      - 8000:8000
+      - 8001:8000
     privileged: true
     restart: unless-stopped
