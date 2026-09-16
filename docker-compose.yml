@@ -1,18 +1,19 @@
 services:
-  rpi-bme280-to-prom:
+  bmporter:
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: rpi-bme280-to-prom
+    container_name: bmporter
+    hostname: bmporter
     environment:
       - GPIOZERO_PIN_FACTORY=rpigpio
       - TZ=America/Chicago
-      - MQTT_BROKER=192.168.0.175
+      - MQTT_BROKER=
       - MQTT_PORT=1883
       - MQTT_USER=
       - MQTT_PW=
-      - MQTT_TOPIC="dzicave/pimedia/sensors"
+      - MQTT_TOPIC="topic/name/whatever"
     ports:
-      - 8001:8000
+      - 8000:8000
     privileged: true
     restart: unless-stopped
