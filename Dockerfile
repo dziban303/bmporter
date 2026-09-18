@@ -1,15 +1,12 @@
-FROM python:3.13.5-bookworm
+FROM python:3.13-slim-bookworm
 
-RUN apt update && apt install -y \
-    python3-dev \
-    gcc
-
-RUN python3 -m venv /app/venv
-ENV PATH="/app/venv/bin:$PATH"
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir \
+RUN pip install \
     board \
     adafruit-circuitpython-bmp280 \
     prometheus_client \
@@ -21,4 +18,4 @@ COPY sensor.py .
 
 EXPOSE 8000
 
-CMD ["python3", "-u", "sensor.py"]
+CMD ["python", "-u", "sensor.py"]
